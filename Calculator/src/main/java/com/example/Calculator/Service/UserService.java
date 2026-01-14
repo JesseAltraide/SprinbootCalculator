@@ -24,7 +24,7 @@ public class UserService {
         return new ResponseEntity<>("Success",  HttpStatus.CREATED);
     }
 
-    public ResponseEntity<String> loginUser(LoginRequest loginRequest){
+    /*public ResponseEntity<String> loginUser(LoginRequest loginRequest){
         try{
             Optional<User> user = userDatabase.findByEmail(loginRequest.getEmail());
             if(user.isPresent()){
@@ -37,6 +37,6 @@ public class UserService {
             e.printStackTrace();
         }
         return new ResponseEntity<>("Invalid Email or Password",  HttpStatus.NOT_FOUND);
-    }
+    }*/
 
 }
