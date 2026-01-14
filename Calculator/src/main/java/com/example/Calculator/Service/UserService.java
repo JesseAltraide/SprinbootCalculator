@@ -8,6 +8,7 @@ import com.example.Calculator.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -18,10 +19,13 @@ public class UserService {
     @Autowired
     UserDatabase userDatabase;
 
-    public ResponseEntity<String> createUser(User user){
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+
+    public ResponseEntity<User> createUser(User user){
         user.setActive(true);
+        user.setPassword(encoder.encode(user.getPassword()));
         userDatabase.save(user);
-        return new ResponseEntity<>("Success",  HttpStatus.CREATED);
+        return new ResponseEntity<>(user,  HttpStatus.CREATED);
     }
 
     /*public ResponseEntity<String> loginUser(LoginRequest loginRequest){
